@@ -1,0 +1,146 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class cqueue
+{
+public:
+    int front;
+    int rear;
+    int n = 5;
+    int arr[5];
+
+    cqueue()
+    {
+        front = -1;
+        rear = -1;
+    }
+
+    int isfull()
+    {
+        if (front == (rear + 1) % n)
+        {
+            cout << "queue is full" << endl;
+            return 1;
+        }
+        else
+        {
+            cout << "queue is not full" << endl;
+            return 0;
+        }
+    }
+
+    int isempty()
+    {
+        if (front == -1 && rear == -1)
+        {
+            cout << "queue is empty" << endl;
+            return 1;
+        }
+        else
+        {
+            cout << "queue is not empty" << endl;
+            return 0;
+        }
+    }
+
+    void enqueue()
+    {
+
+        int a;
+        cout << "enter number to enter :" << endl;
+        cin >> a;
+
+        if (isfull())
+        {
+            cout << "queue is full" << endl;
+        }
+        else if (isempty())
+        {
+            rear = 0;
+            front = 0;
+            arr[rear] = a;
+        }
+        else
+        {
+            rear = (rear + 1) % n;
+            arr[rear] = a;
+        }
+    }
+
+    int dequeue()
+    {
+
+        int b;
+
+        if (isempty())
+        {
+            cout << "queue is empty" << endl;
+        }
+        else if (rear == front)
+        {
+            b = arr[rear];
+            rear = -1;
+            front = -1;
+        }
+        else
+        {
+            b = arr[front];
+            front = (front + 1) % n;
+        }
+        cout << "element deleted :" << b << endl;
+    }
+
+    void display()
+    {
+
+        if (isempty())
+        {
+            cout << "queue is empty" << endl;
+        }
+
+        else
+        {
+            for (int i = front; i <= rear; i = (i + 1) % n)
+            {
+                cout << arr[i] << " ";
+            }
+        }
+        cout << endl;
+    }
+};
+
+int main()
+{
+    int choice, Answer;
+    cqueue a;
+    do
+    {
+        cout << endl;
+        cout << " 1.Enqueue\n 2.Dequeue\n 3.check queue is full\n 4.check queue is empty\n 5.Display queue\n 6.Exit" << endl;
+        cout << endl;
+        cout << "enter the choice :";
+        cin >> choice;
+
+        if (choice == 1)
+        {
+            a.enqueue();
+        }
+        if (choice == 2)
+        {
+            a.dequeue();
+        }
+        if (choice == 3)
+        {
+            a.isfull();
+        }
+        if (choice == 4)
+        {
+            a.isempty();
+        }
+        if (choice == 5)
+        {
+            a.display();
+        }
+
+    } while (choice != 6);
+}
