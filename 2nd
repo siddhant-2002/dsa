@@ -1,0 +1,106 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+int const size=3;
+struct Student
+{
+    int rollNo;
+    char name[20];
+    float SGPA;
+};
+void accept(struct Student list[size]);
+void display(struct Student list[size]);
+void insertionSort(struct Student list[size]);
+void binarySearch(struct Student list[size]);
+int main() 
+{
+   int ch,i;
+   struct Student data[20];
+   accept(data);
+    
+    cout <<"\n1.Insertion\n2.BinarySearch\nSelect your choice: ";
+    cin>>ch;
+    switch(ch)
+    {
+        
+        case 1:insertionSort(data);
+                display(data);
+                break;
+        case 2:
+            insertionSort(data);
+            binarySearch(data);
+            break;
+    }
+
+    return 0;
+}
+void accept(struct Student list[size])
+{
+    int i;
+    for(i=0;i<size;i++)
+    {
+       cout<<"\nEnter RollNo:";
+       cin>>list[i].rollNo;
+        cout<<" \nEnter Name:";
+         cin>>list[i].name;
+       cout<<"\nSGPA:";
+        cin>>list[i].SGPA;
+    }
+}
+void display(struct Student list[size])
+{
+    int i;
+    cout<<"\nRollNo:\tName:\tSGPA:";
+    for(i=0;i<size;i++)
+    {
+       cout<<"\n"<<list[i].rollNo<<"\t"<<list[i].name<<"\t"<<list[i].SGPA; 
+    }
+    
+}
+void insertionSort(struct Student list[size])
+{
+    int k,j;
+    struct Student temp;
+    for(k=1;k<size;k++)
+    {
+        temp=list[k];
+        j=k-1;
+        while(strcmp(list[j].name,temp.name)>0&&j>=0)
+        {
+            list[j+1]=list[j];
+            --j;
+        }
+        list[j+1]=temp;
+    }
+}
+void binarySearch(struct Student list[size])
+{
+    int j,lower,mid,upper;
+    struct Student temp;
+    char search[80];
+    cout<<"\nEnter the Name u want to Search:";
+    cin>>search;
+    lower=0;
+    upper=size-1;
+    mid=(lower+upper)/2;
+    while(lower<=upper)
+    {
+        if(strcmp(list[mid].name,search)<0)
+        {    lower=mid+1;
+            mid=(lower+upper)/2;
+        }
+        else if(strcmp(list[mid].name,search)==0)
+        {
+            cout<<"\n"<<list[mid].name<<"\t"<<list[mid].rollNo<<"\t"<<list[mid].SGPA;
+            break;
+        }
+        else
+        {
+            upper=mid-1;
+           mid=(lower+upper)/2;
+            
+        }
+            
+    }
+    
+}
